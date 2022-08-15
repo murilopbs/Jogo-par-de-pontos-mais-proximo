@@ -10,7 +10,10 @@ void Jogo::iniciarVariaveis(){
 void Jogo::iniciarWindow(){
     this->videomode.width = 800;
     this->videomode.height = 600;
-    this->window = new sf::RenderWindow(this->videomode, "Par de pontos mais próximo", sf::Style::Default, this->settings);
+    std::string str = "Chega Perto";
+	std::basic_string<sf::Uint32> out;
+	sf::Utf8::toUtf32(str.begin(), str.end(), std::back_inserter(out));
+    this->window = new sf::RenderWindow(this->videomode, out, sf::Style::Default, this->settings);
     this->window->setFramerateLimit(4);
 }
 
@@ -46,10 +49,10 @@ void Jogo::pollEvents(){
     }
 }
 
-void Jogo::desenhaComida(std::vector<sf::CircleShape> comida){
+void Jogo::desenhaInimigo(std::vector<sf::CircleShape> inimigo){
     this->window->clear();
-    for(int i = 0; i < comida.size(); ++i)
-        this->window->draw(comida[i]);
+    for(int i = 0; i < inimigo.size(); ++i)
+        this->window->draw(inimigo[i]);
 }
 
 void Jogo::desenhaJogador(sf::CircleShape jogador){

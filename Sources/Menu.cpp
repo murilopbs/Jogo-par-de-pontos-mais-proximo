@@ -4,7 +4,10 @@
 void Menu::iniciaMenu(float width, float height)
 {
 	this->window = nullptr;
-	this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Par de pontos mais próximo");
+	std::string nomeJanela = "Par de pontos mais próximo";
+	std::basic_string<sf::Uint32> nomeJanelaFinal;
+	sf::Utf8::toUtf32(nomeJanela.begin(), nomeJanela.end(), std::back_inserter(nomeJanelaFinal));
+	this->window = new sf::RenderWindow(sf::VideoMode(800, 600), nomeJanelaFinal);
 	if (!font.loadFromFile("../Fontes/arial.ttf"))
 	{
 		// handle error
@@ -43,10 +46,12 @@ void Menu::draw()
 	}
 }
 
-void Menu::MoveUp()
-{
-	if (selectedItemIndex - 1 >= 0)
-	{
+void Menu::MoveUp(){
+	if(selectedItemIndex == 0){
+		menu[selectedItemIndex].setFillColor(sf::Color::White);
+		selectedItemIndex = 2;
+		menu[selectedItemIndex].setFillColor(sf::Color::Red);
+	}else if(selectedItemIndex - 1 >= 0){
 		menu[selectedItemIndex].setFillColor(sf::Color::White);
 		selectedItemIndex--;
 		menu[selectedItemIndex].setFillColor(sf::Color::Red);
@@ -55,7 +60,11 @@ void Menu::MoveUp()
 
 void Menu::MoveDown()
 {
-	if (selectedItemIndex + 1 < 3)
+	if(selectedItemIndex == 2){
+		menu[selectedItemIndex].setFillColor(sf::Color::White);
+		selectedItemIndex = 0;
+		menu[selectedItemIndex].setFillColor(sf::Color::Red);
+	}else if (selectedItemIndex + 1 < 3)
 	{
 		menu[selectedItemIndex].setFillColor(sf::Color::White);
 		selectedItemIndex++;

@@ -31,7 +31,7 @@ class Jogo{
         const bool running() const;
 
         // Funções
-        void desenhaComida(std::vector<sf::CircleShape> comida);
+        void desenhaInimigo(std::vector<sf::CircleShape> inimigo);
         void desenhaJogador(sf::CircleShape jogador);
         void setFrtL(int fps);
         void pollEvents();
